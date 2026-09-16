@@ -1,0 +1,148 @@
+---
+import { Image } from 'astro:assets';
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+	const projects = await getCollection('projects', ({ data }) => !data.draft);
+	return projects.map((project) => ({
+		params: { slug: project.id },
+		props: project,
+	}));
+}
+
+type Props = CollectionEntry<'projects'>;
+
+const project = Astro.props;
+const { title, description, period, role, stack, metrics, repo, demo, heroImage } = project.data;
+const { Content } = await render(project);
+---
+
+<BaseLayout title={title} description={description} image={heroImage}>
+	<article>
+		<header class="wrap-narrow">
+			<p class="eyebrow">{period} · {role}</p>
+			<h1>{title}</h1>
+			<p class="lead">{description}</p>
+			{
+				stack.length > 0 && (
+					<ul class="chip-row">
+						{stack.map((s) => (
+							<li class="chip">{s}</li>
+						))}
+					</ul>
+				)
+			}
+			{
+				(repo || demo) && (
+					<div class="links">
+						{repo && (
+							<a class="btn btn-ghost" href={repo} target="_blank" rel="noopener">
+								Repository
+							</a>
+						)}
+						{demo && (
+							<a class="btn btn-primary" href={demo} target="_blank" rel="noopener">
+								Live demo
+							</a>
+						)}
+					</div>
+				)
+			}
+		</header>
+
+		{
+			metrics.length > 0 && (
+				<dl class="wrap-narrow metrics">
+					{metrics.map(({ label, value }) => (
+						<div>
+							<dt>{label}</dt>
+							<dd>{value}</dd>
+						</div>
+					))}
+				</dl>
+			)
+		}
+
+		{
+			heroImage && (
+				<div class="wrap hero-image">
+					<Image src={heroImage} width={1040} height={520} alt="" />
+				</div>
+			)
+		}
+
+		<div class="wrap-narrow prose">
+			<Content />
+		</div>
+	</article>
+</BaseLayout>
+
+<style>
+	header {
+		padding: 3.5rem 0 1.5rem;
+	}
+	header h1 {
+		font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+		margin-bottom: 0.75rem;
+	}
+	.lead {
+		color: var(--text-muted);
+		margin-bottom: 1.25rem;
+	}
+	.links {
+		display: flex;
+		gap: 0.6rem;
+		margin-top: 1.25rem;
+	}
+
+	.metrics {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+		gap: 1px;
+		margin: 2rem auto;
+		padding: 0;
+		background: var(--border);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		overflow: hidden;
+	}
+	.metrics > div {
+		padding: 1.1rem 1.25rem;
+		background: var(--bg-raised);
+	}
+	.metrics dt {
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+	}
+	.metrics dd {
+		margin: 0.25rem 0 0;
+		font-size: 1.375rem;
+		font-weight: 700;
+		color: var(--accent);
+	}
+
+	.hero-image {
+		margin: 2.5rem auto;
+	}
+	.hero-image img {
+		display: block;
+		width: 100%;
+		border: 1px solid var(--border);
+		box-shadow: var(--shadow-md);
+	}
+
+	.prose {
+		padding-bottom: 2rem;
+	}
+	.prose :global(h2) {
+		margin-top: 2.5rem;
+		padding-top: 0.25rem;
+	}
+	.prose :global(h3) {
+		margin-top: 1.75rem;
+	}
+</style>

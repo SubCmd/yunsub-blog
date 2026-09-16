@@ -1,0 +1,115 @@
+---
+import { NOTE_CATEGORIES, type NoteCategory } from '../consts';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+	href: string;
+	title: string;
+	category: NoteCategory;
+	by?: string;
+	rating?: number;
+	description: string;
+	date: Date;
+	keywords?: string[];
+}
+
+const { href, title, category, by, rating, description, date, keywords = [] } = Astro.props;
+---
+
+<a class="note" href={href}>
+	<div class="top">
+		<span class="cat">{NOTE_CATEGORIES[category].label}</span>
+		{
+			rating && (
+				<span class="rating" title={`5점 만점에 ${rating}점`}>
+					<span aria-hidden="true">{'★'.repeat(rating)}{'☆'.repeat(5 - rating)}</span>
+					<span class="sr-only">5점 만점에 {rating}점</span>
+				</span>
+			)
+		}
+	</div>
+	<h3>{title}</h3>
+	{by && <p class="by">{by}</p>}
+	<p class="desc">{description}</p>
+	<div class="bottom">
+		<FormattedDate date={date} />
+		{
+			keywords.length > 0 && (
+				<ul class="chip-row">
+					{keywords.slice(0, 3).map((k) => (
+						<li class="chip">{k}</li>
+					))}
+				</ul>
+			)
+		}
+	</div>
+</a>
+
+<style>
+	.note {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+		height: 100%;
+		padding: 1.25rem;
+		background: var(--bg-raised);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		text-decoration: none;
+		color: inherit;
+		transition: 0.18s ease;
+	}
+	.note:hover {
+		border-color: var(--accent);
+		box-shadow: var(--shadow-md);
+		transform: translateY(-2px);
+	}
+	.top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.5rem;
+	}
+	.cat {
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		color: var(--accent);
+	}
+	.rating {
+		font-size: 0.8125rem;
+		color: var(--accent);
+		letter-spacing: 0.05em;
+	}
+	h3 {
+		margin: 0;
+		font-size: 1.0625rem;
+	}
+	.by {
+		margin: 0;
+		font-size: 0.8125rem;
+		color: var(--text-muted);
+	}
+	.desc {
+		margin: 0.25rem 0 0;
+		flex: 1;
+		font-size: 0.9375rem;
+		color: var(--text-muted);
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+	.bottom {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: 0.6rem;
+		padding-top: 0.75rem;
+		border-top: 1px solid var(--border);
+		font-size: 0.75rem;
+		color: var(--text-muted);
+	}
+</style>

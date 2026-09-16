@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from '../../components/ProjectCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const projects = (await getCollection('projects', ({ data }) => !data.draft)).sort(
+	(a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout
+	title="Projects"
+	description="문제 정의부터 성과까지, 직접 만들고 운영한 프로젝트 기록."
+>
+	<div class="wrap head">
+		<p class="eyebrow">Projects</p>
+		<h1>만든 것과, 그래서 무엇이 달라졌는지</h1>
+		<p class="muted">각 프로젝트는 문제 · 접근 · 성과 순서로 정리했습니다.</p>
+	</div>
+
+	<div class="wrap">
+		{
+			projects.length > 0 ? (
+				<div class="grid">
+					{projects.map((project) => (
+						<ProjectCard
+							href={`/projects/${project.id}/`}
+							title={project.data.title}
+							description={project.data.description}
+							period={project.data.period}
+							role={project.data.role}
+							stack={project.data.stack}
+						/>
+					))}
+				</div>
+			) : (
+				<p class="muted">
+					<code>src/content/projects/</code>에 마크다운 파일을 추가하면 여기에 표시됩니다.
+				</p>
+			)
+		}
+	</div>
+</BaseLayout>
+
+<style>
+	.head {
+		padding: 3.5rem 0 2.5rem;
+	}
+	.head h1 {
+		margin-bottom: 0.5rem;
+	}
+	.head p.muted {
+		margin: 0;
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1rem;
+	}
+</style>

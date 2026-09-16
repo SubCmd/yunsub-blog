@@ -1,0 +1,102 @@
+---
+import { getCollection } from 'astro:content';
+import NoteCard from '../../components/NoteCard.astro';
+import { NOTE_CATEGORIES, type NoteCategory } from '../../consts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const notes = (await getCollection('notes', ({ data }) => !data.draft)).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const counts = Object.entries(NOTE_CATEGORIES).map(([key, meta]) => ({
+	key: key as NoteCategory,
+	...meta,
+	count: notes.filter((note) => note.data.category === key).length,
+}));
+---
+
+<BaseLayout
+	title="Notes"
+	description="읽은 책과 맡아본 향수. 커리어 바깥에서 내가 무엇에 시간을 쓰는지에 대한 기록."
+>
+	<div class="wrap head">
+		<p class="eyebrow">Notes</p>
+		<h1>읽고, 맡고, 남깁니다</h1>
+		<p class="muted">
+			이력서에 안 들어가는 것들. 취향도 결국 판단의 기록이라고 생각해서 같이 남깁니다.
+		</p>
+		<div class="counts">
+			{
+				counts.map(({ label, unit, count }) => (
+					<div>
+						<strong>{count}</strong>
+						<span>
+							{label} {unit}
+						</span>
+					</div>
+				))
+			}
+		</div>
+	</div>
+
+	<div class="wrap">
+		{
+			notes.length > 0 ? (
+				<div class="grid">
+					{notes.map((note) => (
+						<NoteCard
+							href={`/notes/${note.id}/`}
+							title={note.data.title}
+							category={note.data.category}
+							by={note.data.by}
+							rating={note.data.rating}
+							description={note.data.description}
+							date={note.data.date}
+							keywords={note.data.keywords}
+						/>
+					))}
+				</div>
+			) : (
+				<p class="muted">
+					<code>src/content/notes/</code>에 마크다운 파일을 추가하면 여기에 표시됩니다.
+				</p>
+			)
+		}
+	</div>
+</BaseLayout>
+
+<style>
+	.head {
+		padding: 3.5rem 0 2rem;
+	}
+	.head h1 {
+		margin-bottom: 0.5rem;
+	}
+	.head p.muted {
+		max-width: 52ch;
+		margin: 0;
+	}
+	.counts {
+		display: flex;
+		gap: 2.5rem;
+		margin-top: 1.75rem;
+	}
+	.counts div {
+		display: flex;
+		align-items: baseline;
+		gap: 0.4rem;
+	}
+	.counts strong {
+		font-size: 1.75rem;
+		color: var(--accent);
+	}
+	.counts span {
+		font-size: 0.875rem;
+		color: var(--text-muted);
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+		gap: 1rem;
+	}
+</style>

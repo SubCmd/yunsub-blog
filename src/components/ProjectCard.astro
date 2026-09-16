@@ -1,0 +1,67 @@
+---
+interface Props {
+	href: string;
+	title: string;
+	description: string;
+	period: string;
+	role: string;
+	stack?: string[];
+}
+
+const { href, title, description, period, role, stack = [] } = Astro.props;
+---
+
+<a class="card" href={href}>
+	<div class="meta">{period} · {role}</div>
+	<h3>{title}</h3>
+	<p>{description}</p>
+	{
+		stack.length > 0 && (
+			<ul class="chip-row">
+				{stack.slice(0, 4).map((s) => (
+					<li class="chip">{s}</li>
+				))}
+			</ul>
+		)
+	}
+</a>
+
+<style>
+	.card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		height: 100%;
+		padding: 1.4rem;
+		background: var(--bg-raised);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		text-decoration: none;
+		color: inherit;
+		transition: 0.18s ease;
+	}
+	.card:hover {
+		border-color: var(--accent);
+		box-shadow: var(--shadow-md);
+		transform: translateY(-2px);
+	}
+	.meta {
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		color: var(--accent);
+	}
+	h3 {
+		margin: 0;
+		font-size: 1.125rem;
+	}
+	p {
+		margin: 0;
+		flex: 1;
+		font-size: 0.9375rem;
+		color: var(--text-muted);
+	}
+	.chip-row {
+		margin-top: 0.35rem;
+	}
+</style>

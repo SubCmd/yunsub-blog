@@ -4,21 +4,37 @@ import type { HTMLAttributes } from 'astro/types';
 type Props = HTMLAttributes<'a'>;
 
 const { href, class: className, ...props } = Astro.props;
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
-const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
+const pathname = `/${Astro.url.pathname.replace(import.meta.env.BASE_URL, '').replace(/^\/|\/$/g, '')}`;
+const isActive = href === pathname || (href !== '/' && pathname.startsWith(`${href}`));
 ---
 
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
+<a
+	href={href}
+	class:list={[className, { active: isActive }]}
+	aria-current={isActive ? 'page' : undefined}
+	{...props}
+>
 	<slot />
 </a>
+
 <style>
 	a {
 		display: inline-block;
+		padding: 0.35em 0.7em;
+		border-radius: 999px;
+		font-size: 0.9375rem;
+		font-weight: 500;
+		color: var(--text-muted);
 		text-decoration: none;
+		transition: 0.18s ease;
+	}
+	a:hover {
+		color: var(--accent);
+		background: var(--accent-tint);
 	}
 	a.active {
-		font-weight: bolder;
-		text-decoration: underline;
+		color: var(--accent);
+		font-weight: 700;
+		background: var(--accent-tint);
 	}
 </style>

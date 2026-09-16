@@ -1,0 +1,66 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import PostCard from '../../../components/PostCard.astro';
+import { tagLabel } from '../../../consts';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog', ({ data }) => !data.draft);
+	const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+
+	return tags.map((tag) => ({
+		params: { tag },
+		props: {
+			tag,
+			posts: posts
+				.filter((post) => post.data.tags.includes(tag))
+				.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+		},
+	}));
+}
+
+interface Props {
+	tag: string;
+	posts: CollectionEntry<'blog'>[];
+}
+
+const { tag, posts } = Astro.props;
+const label = tagLabel(tag);
+---
+
+<BaseLayout title={`${label} 글`} description={`${label} 태그가 붙은 글 ${posts.length}편.`}>
+	<div class="wrap-narrow head">
+		<p class="eyebrow">Tag</p>
+		<h1>{label}</h1>
+		<p class="muted">{posts.length}편 · <a href="/blog">전체 글로 돌아가기</a></p>
+	</div>
+
+	<div class="wrap-narrow list">
+		{
+			posts.map((post) => (
+				<PostCard
+					href={`/blog/${post.id}/`}
+					title={post.data.title}
+					description={post.data.description}
+					pubDate={post.data.pubDate}
+					tags={post.data.tags}
+				/>
+			))
+		}
+	</div>
+</BaseLayout>
+
+<style>
+	.head {
+		padding: 3.5rem 0 1.5rem;
+	}
+	.head h1 {
+		margin-bottom: 0.5rem;
+	}
+	.head p.muted {
+		margin: 0;
+	}
+	.list {
+		border-top: 1px solid var(--border);
+	}
+</style>

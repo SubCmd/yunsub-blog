@@ -1,63 +1,243 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import { CAREER, EDUCATION, PROFILE, SKILLS, SOCIALS } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
+<BaseLayout
+	title="About"
+	description={`${PROFILE.name} · ${PROFILE.role}. 이력, 기술 스택, 연락처.`}
 >
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+	<div class="wrap-narrow">
+		<header class="head">
+			<p class="eyebrow">About</p>
+			<h1>{PROFILE.name} · {PROFILE.role}</h1>
+			<p class="lead">{PROFILE.intro}</p>
+			<div class="actions">
+				{
+					PROFILE.resumeUrl && (
+						<a class="btn btn-primary" href={PROFILE.resumeUrl}>
+							이력서 (PDF)
+						</a>
+					)
+				}
+				<a class="btn btn-ghost" href={SOCIALS.email}>{PROFILE.email}</a>
+			</div>
+		</header>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+		<section>
+			<h2>경력</h2>
+			<ol class="timeline">
+				{
+					CAREER.map(({ period, org, role, summary, points }) => (
+						<li>
+							<p class="period">{period}</p>
+							<h3>
+								{org} <span class="role">{role}</span>
+							</h3>
+							<p class="summary">{summary}</p>
+							{points.length > 0 && (
+								<ul>
+									{points.map((point) => (
+										<li>{point}</li>
+									))}
+								</ul>
+							)}
+						</li>
+					))
+				}
+			</ol>
+		</section>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+		<section>
+			<h2>학력</h2>
+			<ul class="education">
+				{
+					EDUCATION.map(({ school, major, note }) => (
+						<li>
+							<div>
+								<strong>{major}</strong>
+								<span class="school">{school}</span>
+							</div>
+							<span class="chip">{note}</span>
+						</li>
+					))
+				}
+			</ul>
+		</section>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+		<section>
+			<h2>기술 스택</h2>
+			<dl class="stack">
+				{
+					SKILLS.map(({ area, items }) => (
+						<div>
+							<dt>{area}</dt>
+							<dd>{items.join(' · ')}</dd>
+						</div>
+					))
+				}
+			</dl>
+		</section>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+		<section>
+			<h2>연락</h2>
+			<p class="muted">
+				협업, 채용, 커피챗 모두 환영합니다. 메일이 가장 빠릅니다.
+			</p>
+			<ul class="contact">
+				<li><span>Email</span><a href={SOCIALS.email}>{PROFILE.email}</a></li>
+				<li>
+					<span>Phone</span><a href={`tel:${PROFILE.phone.replace(/-/g, '')}`}>{PROFILE.phone}</a>
+				</li>
+				<li>
+					<span>GitHub</span><a href={SOCIALS.github} target="_blank" rel="noopener"
+						>{SOCIALS.github.replace('https://', '')}</a
+					>
+				</li>
+				<li>
+					<span>LinkedIn</span><a href={SOCIALS.linkedin} target="_blank" rel="noopener"
+						>{SOCIALS.linkedin.replace('https://', '')}</a
+					>
+				</li>
+			</ul>
+		</section>
+	</div>
+</BaseLayout>
+
+<style>
+	.head {
+		padding: 3.5rem 0 1rem;
+	}
+	.head h1 {
+		margin-bottom: 0.75rem;
+	}
+	.lead {
+		color: var(--text-muted);
+	}
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+		margin-top: 1.5rem;
+	}
+
+	section {
+		padding: 2.5rem 0;
+		border-top: 1px solid var(--border);
+	}
+	section h2 {
+		margin-bottom: 1.5rem;
+	}
+
+	.timeline {
+		list-style: none;
+		margin: 0;
+		padding: 0 0 0 1.5rem;
+		border-left: 2px solid var(--accent-line);
+	}
+	.timeline > li {
+		position: relative;
+		padding-bottom: 2rem;
+	}
+	.timeline > li:last-child {
+		padding-bottom: 0;
+	}
+	.timeline > li::before {
+		content: '';
+		position: absolute;
+		left: calc(-1.5rem - 6px);
+		top: 0.6rem;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background: var(--accent);
+	}
+	.period {
+		margin: 0;
+		font-size: 0.8125rem;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		color: var(--accent);
+	}
+	.timeline h3 {
+		margin: 0.15rem 0 0.4rem;
+	}
+	.role {
+		font-weight: 500;
+		font-size: 0.9375rem;
+		color: var(--text-muted);
+	}
+	.summary {
+		margin: 0 0 0.6rem;
+		color: var(--text-muted);
+		font-size: 0.9375rem;
+	}
+	.timeline ul {
+		margin: 0;
+		padding-left: 1.1rem;
+		font-size: 0.9375rem;
+	}
+	.timeline ul li {
+		margin-bottom: 0.3rem;
+	}
+
+	.education {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.education li {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.85rem 0;
+		border-bottom: 1px solid var(--border);
+	}
+	.education li:last-child {
+		border-bottom: none;
+	}
+	.education strong {
+		display: block;
+	}
+	.school {
+		font-size: 0.875rem;
+		color: var(--text-muted);
+	}
+
+	.stack {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 1.25rem;
+		margin: 0;
+	}
+	.stack dt {
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+	.stack dd {
+		margin: 0.35rem 0 0;
+		font-size: 0.9375rem;
+		color: var(--text-muted);
+	}
+
+	.contact {
+		list-style: none;
+		margin: 1.25rem 0 0;
+		padding: 0;
+	}
+	.contact li {
+		display: flex;
+		gap: 1rem;
+		padding: 0.6rem 0;
+		border-bottom: 1px solid var(--border);
+		font-size: 0.9375rem;
+	}
+	.contact span {
+		flex: 0 0 5.5rem;
+		color: var(--text-muted);
+	}
+</style>

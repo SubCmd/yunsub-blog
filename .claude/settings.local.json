@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(perl -0pi -e 's/^\\(---\\\\n\\(?:.*\\\\n\\)*?\\)\\(---\\\\n\\)/$1draft: true\\\\n$2/' src/content/blog/__TRACKED_VAR__)",
+      "Bash(npx astro *)",
+      "PowerShell(npx astro build)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Program Files\\\\nodejs\",\"$env:LOCALAPPDATA\\\\fnm\",\"$env:APPDATA\\\\nvm\",\"$env:LOCALAPPDATA\\\\Volta\",\"C:\\\\Program Files\\\\Volta\" -Filter \"node.exe\" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 5 -ExpandProperty FullName)",
+      "Bash(export PATH=\"/c/Program Files/nodejs:$PATH\")",
+      "Bash(node node_modules/astro/astro.js build)",
+      "Bash(./node_modules/.bin/astro build *)",
+      "Bash(./node_modules/.bin/astro dev *)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -s -o /tmp/pg.html -w '%{http_code}' http://localhost:4321__TRACKED_VAR__)",
+      "Read(//tmp/**)",
+      "Bash(curl -s http://localhost:4321/blog)",
+      "Bash(curl -s http://localhost:4321/about)",
+      "Bash(curl -s http://localhost:4321/projects)",
+      "Bash(echo \"projects cards: $\\(curl -s http://localhost:4321/projects)",
+      "Read(//c/dev/**)",
+      "Bash(node -e ' *)",
+      "Bash(export PATH=\"/c/Program Files/nodejs:$PATH\" cd \"/c/Users/ST-USER/Desktop/EDUB-pipeline\" node -e ' const fs=require\\(\"fs\"\\); const j=JSON.parse\\(fs.readFileSync\\(\"data/cuts_all.json\",\"utf8\"\\)\\); console.log\\(\"sample record:\", JSON.stringify\\(j[0],null,1\\).slice\\(0,500\\)\\); const unis=new Set\\(j.map\\(r=>r.university||r.univ||r.대학||r.school\\).filter\\(Boolean\\)\\); console.log\\(\"distinct universities:\", unis.size\\); const keys=Object.keys\\(j[0]\\); console.log\\(\"keys:\", keys.join\\(\", \"\\)\\); ' echo \"=== src tree ===\" find src scripts tests -type f -name \"*.py\")",
+      "Bash(cd \"/c/Users/ST-USER/Desktop/EDUB-pipeline\" echo \"=== pipeline stages ===\" grep -oE \"stage[0-9_a-z]*|def [a-z_]+\" src/edub/pipeline.py)"
+    ]
+  }
+}
