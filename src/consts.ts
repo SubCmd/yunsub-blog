@@ -3,7 +3,7 @@ export const SITE_DESCRIPTION =
 	'현장에서 8년간 쌓은 운영 감각 위에 데이터 파이프라인을 얹습니다. 프로젝트와 기록, 그리고 읽고 맡는 것들.';
 
 export const PROFILE = {
-	name: '윤섭',
+	name: '이윤섭',
 	nameEn: 'Yunsub',
 	// 한 줄 직함. 이력서/링크드인과 같은 표현으로 맞추는 게 좋습니다.
 	role: '프로그램 개발 · 데이터 파이프라인',
@@ -52,7 +52,7 @@ export const SKILLS = [
 
 export const CAREER = [
 	{
-		period: '2024.10 — 현재',
+		period: '2024.10 — 재직 중',
 		org: '(주)코에듀지피티',
 		role: 'AI Agent Programmer · PM',
 		summary:
@@ -64,7 +64,7 @@ export const CAREER = [
 		],
 	},
 	{
-		period: '8년차 · 재직 중',
+		period: '2018.03 - 2024.10',
 		org: 'conshow',
 		role: '매니저 — 프로그램 개발 · CS',
 		summary: '교육 프로그램을 직접 설계·개발하고, 고객 응대 프로세스를 함께 운영했습니다.',
