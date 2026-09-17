@@ -19,7 +19,12 @@
       "Read(//c/dev/**)",
       "Bash(node -e ' *)",
       "Bash(export PATH=\"/c/Program Files/nodejs:$PATH\" cd \"/c/Users/ST-USER/Desktop/EDUB-pipeline\" node -e ' const fs=require\\(\"fs\"\\); const j=JSON.parse\\(fs.readFileSync\\(\"data/cuts_all.json\",\"utf8\"\\)\\); console.log\\(\"sample record:\", JSON.stringify\\(j[0],null,1\\).slice\\(0,500\\)\\); const unis=new Set\\(j.map\\(r=>r.university||r.univ||r.대학||r.school\\).filter\\(Boolean\\)\\); console.log\\(\"distinct universities:\", unis.size\\); const keys=Object.keys\\(j[0]\\); console.log\\(\"keys:\", keys.join\\(\", \"\\)\\); ' echo \"=== src tree ===\" find src scripts tests -type f -name \"*.py\")",
-      "Bash(cd \"/c/Users/ST-USER/Desktop/EDUB-pipeline\" echo \"=== pipeline stages ===\" grep -oE \"stage[0-9_a-z]*|def [a-z_]+\" src/edub/pipeline.py)"
+      "Bash(cd \"/c/Users/ST-USER/Desktop/EDUB-pipeline\" echo \"=== pipeline stages ===\" grep -oE \"stage[0-9_a-z]*|def [a-z_]+\" src/edub/pipeline.py)",
+      "Bash(curl -s http://localhost:4321/)",
+      "Bash(curl -s http://localhost:4321/projects/edu-rag/ -o /dev/null -w \"%{http_code}\\\\n\")",
+      "Bash(curl -s http://localhost:4321/projects/edu-rag/ -o /dev/null -w \"edu-rag: %{http_code}\\\\n\")",
+      "Bash(curl -s http://localhost:4321/notes/perfume-jazz-club/ -o /dev/null -w \"jazz-club: %{http_code}\\\\n\")",
+      "Bash(curl -s http://localhost:4321/notes/perfume-jazz-club/)"
     ]
   }
 }

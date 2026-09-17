@@ -8,7 +8,7 @@ description: '재즈바에 입장하자마자 바텐더가 갓 제조한 칵테�
 keywords: ['우디', '가을', '데일리']
 ---
 
-![재즈 클럽 보틀](src\assets\perfume-jazz-club.png)
+![재즈 클럽 보틀](../../assets/perfume-jazz-club.png)
 
 ## 노트
 
