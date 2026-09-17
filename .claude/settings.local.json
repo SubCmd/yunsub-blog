@@ -24,7 +24,8 @@
       "Bash(curl -s http://localhost:4321/projects/edu-rag/ -o /dev/null -w \"%{http_code}\\\\n\")",
       "Bash(curl -s http://localhost:4321/projects/edu-rag/ -o /dev/null -w \"edu-rag: %{http_code}\\\\n\")",
       "Bash(curl -s http://localhost:4321/notes/perfume-jazz-club/ -o /dev/null -w \"jazz-club: %{http_code}\\\\n\")",
-      "Bash(curl -s http://localhost:4321/notes/perfume-jazz-club/)"
+      "Bash(curl -s http://localhost:4321/notes/perfume-jazz-club/)",
+      "Bash(curl -s http://localhost:4321/notes/perfume-jazz-club/ -o /dev/null -w \"status: %{http_code}\\\\n\")"
     ]
   }
 }
