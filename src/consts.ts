@@ -11,14 +11,14 @@ export const PROFILE = {
 	intro:
 		'교육 현장에서 8년간 프로그램을 개발하고 고객을 응대하며, 데이터가 어디서 새고 어디서 막히는지를 몸으로 익혔습니다. 정치외교학으로 사람과 제도를 읽는 법을, 데이터사이언스로 그것을 측정하는 법을 배웠습니다.',
 	location: 'Seoul, KR',
-	email: 'hello@yunsub.dev',
+	email: 'ehdpahd159@gmail.com',
 	phone: '010-8775-5280',
 	// public/resume.pdf 를 넣은 뒤 '/resume.pdf' 로 바꾸면 About에 버튼이 나타난다.
 	resumeUrl: '',
 };
 
 export const SOCIALS = {
-	github: 'https://github.com/yunsub',
+	github: 'https://github.com/subcmd',
 	linkedin: 'https://www.linkedin.com/in/yunsub',
 	email: `mailto:${PROFILE.email}`,
 };
