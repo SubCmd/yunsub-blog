@@ -5,7 +5,7 @@ pubDate: 'Oct 16 2026'
 tags: ['ai', 'dev']
 ---
 
-> 시리즈 [프롬프트를 코드처럼 다루기](/blog/2026-10-16-prompt-engineering-01-overview/)의 세 번째 글.
+> 시리즈 [프롬프트를 코드처럼 다루기](/blog/2026-09-20-prompt-engineering-01-overview/)의 세 번째 글.
 
 ## 터진 문제
 

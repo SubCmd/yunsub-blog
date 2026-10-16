@@ -5,7 +5,7 @@ pubDate: 'Oct 16 2026'
 tags: ['ai', 'dev']
 ---
 
-> 시리즈 [프롬프트를 코드처럼 다루기](/blog/2026-10-16-prompt-engineering-01-overview/)의 다섯 번째 글.
+> 시리즈 [프롬프트를 코드처럼 다루기](/blog/2026-09-20-prompt-engineering-01-overview/)의 다섯 번째 글.
 
 ## 터진 문제
 
@@ -20,7 +20,7 @@ tags: ['ai', 'dev']
 증상은 일정했다. **뒤쪽 작업은 잘 되고 앞쪽 작업이 부실해졌다.**
 추천은 그럴듯한데, 그 근거가 될 추출 단계가 대충 넘어가 있었다.
 
-여기서 [구조화](/blog/2026-10-16-prompt-engineering-02-role-and-constraints/)를 더 해봤지만 효과가 작았다.
+여기서 [구조화](/blog/2026-09-22-prompt-engineering-02-role-and-constraints/)를 더 해봤지만 효과가 작았다.
 구조화는 **지시가 섞였을 때** 듣는다. 이건 다른 문제였다.
 **한 번의 호출에 작업이 너무 많았다.**
 
