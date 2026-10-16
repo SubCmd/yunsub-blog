@@ -3,7 +3,6 @@ title: '평가셋과 회귀 테스트 — 프롬프트를 고쳤는데 다른 �
 description: '프롬프트 수정은 전역 변경이다. 평가셋 없이 고치는 건 개선이 아니라 교체였다. 측정 체계를 만든 기록.'
 pubDate: 'Oct 16 2026'
 tags: ['ai', 'dev']
-draft: true
 ---
 
 > 시리즈 [프롬프트를 코드처럼 다루기](/blog/2026-10-16-prompt-engineering-01-overview/)의 마지막 글.
