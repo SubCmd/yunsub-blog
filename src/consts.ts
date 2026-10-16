@@ -93,6 +93,7 @@ export const BLOG_TAGS: Record<string, string> = {
 	dev: '개발',
 	data: '데이터',
 	til: 'TIL',
+	ai: 'AI · LLM',
 	career: '커리어',
 	life: '일상',
 };
